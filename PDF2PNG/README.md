@@ -49,12 +49,27 @@ Output images will be saved in `output_images/<pdf_name>/`.
 ## 🛠️ Requirements
 
 * Python 3.8+
-* Poppler (add to system PATH)
+* Poppler (required for `pdf2image`)
 * Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
+
+### 📦 Poppler Installation
+
+* **Windows:** Download from [Poppler for Windows](https://github.com/oschwartz10612/poppler-windows/releases/tag/v24.07.0-0)
+  📺 Watch setup video tutorial: [YouTube Guide](https://www.youtube.com/watch?v=oO6UeweyXnw&list=PLtdjj8-_G95avR_rgTXSTM91ziE0G4cjS&index=2&t=20s)
+* **macOS:**
+
+  ```bash
+  brew install poppler
+  ```
+* **Linux:**
+
+  ```bash
+  sudo apt install poppler-utils
+  ```
 
 ---
 
