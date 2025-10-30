@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 import os
 import io
 import zipfile
-# You need PyPDF2 to check the page count before processing for safety
+# You added this - make sure it's installed!
+# pip install PyPDF2
 import PyPDF2 
 
 # --- Configuration and Page Setup ---
@@ -48,8 +49,8 @@ def perform_conversion(pdf_bytes, dpi):
 @st.dialog("Enlarged Image")
 def show_image_dialog(image_bytes, page_num):
     """Displays the selected image in a large dialog box."""
-    # FIX: Replaced use_column_width=True with use_container_width=True
-    st.image(image_bytes, caption=f"Page {page_num}", use_container_width=True) 
+    # FIX: Replaced use_container_width=True with width='stretch'
+    st.image(image_bytes, caption=f"Page {page_num}", width='stretch') 
     if st.button("Close"):
         st.rerun()
 
@@ -146,7 +147,7 @@ if uploaded_file is not None:
             data=zip_data,
             file_name=f"{pdf_filename}_all_pages.zip",
             mime="application/zip",
-            use_container_width=True,
+            width='stretch', # <-- FIX 1
             on_click="ignore" 
         )
         
@@ -161,15 +162,15 @@ if uploaded_file is not None:
                 st.image(
                     img_bytes,
                     caption=f"Page {i + 1}",
-                    # FIX: Replaced use_column_width=True with use_container_width=True
-                    use_container_width=True 
+                    width='stretch' # <-- FIX 2
                 )
                 
                 btn_col1, btn_col2 = st.columns(2)
                 
                 # --- MODIFIED: "Enlarge" button ---
                 with btn_col1:
-                    if st.button("Enlarge 🔎", key=f"enlarge_{i}", use_container_width=True):
+                    # <-- FIX 3
+                    if st.button("Enlarge 🔎", key=f"enlarge_{i}", width='stretch'): 
                         show_image_dialog(img_bytes, i + 1)
                 
                 with btn_col2:
@@ -178,7 +179,7 @@ if uploaded_file is not None:
                         data=img_bytes,
                         file_name=page_name,
                         mime="image/png",
-                        use_container_width=True,
+                        width='stretch', # <-- FIX 4
                         key=f"download_{i}",
                         on_click="ignore" 
                     )
