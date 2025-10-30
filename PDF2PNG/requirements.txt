@@ -1,5 +1,5 @@
 streamlit
-pdf2image
+pypdfium2
 python-dotenv
 PyPDF2
 Pillow
